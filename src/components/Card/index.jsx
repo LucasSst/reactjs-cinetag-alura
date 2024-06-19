@@ -5,7 +5,7 @@ import styles from './Card.module.css';
 import favorite_full from '/assents/imagens/favorite.png';
 import favorite_outline from '/assents/imagens/favorite_outline.png';
 
-const Card = ({ id, title, cape }) => {
+const Card = ({ id, titulo, capa }) => {
     const { favorite, addFavorite } = useFavoriteContext();
     const isFavorite = favorite.some((fav) => fav.id === id);
     const icone = isFavorite ? favorite_full : favorite_outline;
@@ -13,14 +13,14 @@ const Card = ({ id, title, cape }) => {
     return (
         <div className={styles.container}>
             <Link className={styles.link} to={`/${id}`}>
-                <img src={cape} alt={title} className={styles.cape} />
-                <h2>{title}</h2>
+                <img src={capa} alt={titulo} className={styles.capa} />
+                <h2>{titulo}</h2>
             </Link>
             <img src={icone}
                 alt="Favoritar filme"
                 className={styles.favorite}
                 onClick={() => {
-                    addFavorite({ id, title, cape })
+                    addFavorite({ id, titulo, capa })
                 }} />
         </div>
 

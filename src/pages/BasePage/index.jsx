@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 
 function BasePage() {
     return (
-        <main>
+        <div>
             <Header/>
             <FavoritesProvider>
                 <Container>
@@ -14,7 +14,7 @@ function BasePage() {
                 </Container>
             </FavoritesProvider>
             <Footer/>
-        </main>
+        </div>
     )
 }
 

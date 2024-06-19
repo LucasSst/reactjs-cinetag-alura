@@ -1,16 +1,28 @@
-// eslint-disable-next-line no-unused-vars
-import styles from './Player.module.css';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Banner from '../../components/Banner'
 import Title from '../../components/Title'
-import { useParams } from 'react-router-dom';
-import videos from '../../json/db.json'
+// eslint-disable-next-line no-unused-vars
+import styles from './Player.module.css';
+
 import NotFound from '../NotFound';
 const Player = () => {
+    const [videos ,setVideos] = useState([]);
     const parameters = useParams();
-    const video = videos.find((video) => video.id === Number(parameters.id))
 
-    if(!video) return <NotFound/>
-    
+
+    useEffect(()=> {
+        fetch(`https://my-json-server.typicode.com/monicahillman/cinetag-api/videos?id=${parameters.id}`)
+        .then((r) => r.json())
+        .then((data) => {
+            setVideos(...data)
+        }, [])
+
+    })
+
+
+    if(!videos) return <NotFound/>
+
     return (
         <>
             <Banner imagem="player" />
@@ -21,7 +33,7 @@ const Player = () => {
                 <iframe
                     width="100%"
                     height="100%"
-                    src={video.link} title={video.title} frameBorder="0"
+                    src={videos.link} title={videos.titulo} frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen>
 
                 </iframe>
